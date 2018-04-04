@@ -4,17 +4,18 @@ import Book from './Book';
 
 class BookGrid extends Component {
     static propTypes = {
-        books: PropTypes.array || PropTypes.object,
+        books: PropTypes.array,
+        handleChange: PropTypes.func.isRequired,
     };
     render() {
-        const { books } = this.props;
+        const { books, handleChange } = this.props;
         return (
             <ol className="books-grid">
-                {Array.isArray(books) ? books.map((book)=>(
+                {books.map((book)=>(
                     <li key={book.infoLink}>
-                        <Book bookDetails={book} />
+                        <Book bookDetails={book} handleChange={handleChange}/>
                     </li>
-                )): (<li></li>)}
+                ))}
             </ol>
         );
     }
