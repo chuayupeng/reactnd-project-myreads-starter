@@ -6,6 +6,7 @@ class Book extends Component {
         bookDetails: PropTypes.object.isRequired,
         handleChange: PropTypes.func.isRequired,
     };
+    
     render() {
         const { bookDetails, handleChange } = this.props;
         return bookDetails.length !== 0 ? (

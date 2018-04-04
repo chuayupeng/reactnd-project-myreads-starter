@@ -11,6 +11,7 @@ class BookList extends Component {
         readBooks: PropTypes.array.isRequired,
         handleChange: PropTypes.func.isRequired,
     };
+    
     render() {
         const { currReadingBooks, wantToReadBooks, readBooks, handleChange } = this.props;
          return (

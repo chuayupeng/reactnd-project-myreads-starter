@@ -9,15 +9,18 @@ class Search extends Component {
         searchBook: PropTypes.func.isRequired,
         handleChange: PropTypes.func.isRequired,
     };
+
     state = {
         query: ''
     };
+    
     updateQuery = (query) => {
         this.setState(()=> ({
             query: query.trim()
         }));
         this.props.searchBook(query);
-    };
+    }
+    
     render() {
         const { query } = this.state;
         const { searchResults, handleChange } = this.props;

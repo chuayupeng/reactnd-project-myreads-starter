@@ -8,6 +8,7 @@ class BookShelf extends Component{
         books: PropTypes.array.isRequired,
         handleChange: PropTypes.func.isRequired,
     };
+    
     render() {
         const {title, books, handleChange} = this.props;
         return (

@@ -11,10 +11,12 @@ class BooksApp extends React.Component {
     wantToReadBooks: [],
     readBooks: [],
     searchResults: [],
-  }
+  };
+
   componentWillMount() {
     this.refreshShelves();
   }
+
   refreshShelves = () => {
     BooksAPI.getAll().then((books) => {
       const currReadingBooks = books.filter((book)=>(book.shelf === 'currentlyReading'));
@@ -25,27 +27,25 @@ class BooksApp extends React.Component {
         wantToReadBooks,
         readBooks,
       }));
-
-    })
+    });
   }
+
   updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf)
-      .then(()=>(
-        this.refreshShelves()
-      ));
+      .then(()=>(this.refreshShelves()));
   }
+
   searchBook = (query) => {
     BooksAPI.search(query).then((results)=>{
       const searchResults = Array.isArray(results) ? results : [];
-      this.setState(()=>({searchResults}))
-
-    })
+      this.setState(()=>({searchResults}));
+    });
   }
 
   handleChange = (bookDetails) => (event) => {
     const newShelf = event.target.value;
     this.updateShelf(bookDetails, newShelf);
-  };
+  }
   
   render() {
     return (

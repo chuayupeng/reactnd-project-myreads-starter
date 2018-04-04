@@ -7,6 +7,7 @@ class BookGrid extends Component {
         books: PropTypes.array,
         handleChange: PropTypes.func.isRequired,
     };
+    
     render() {
         const { books, handleChange } = this.props;
         return (
