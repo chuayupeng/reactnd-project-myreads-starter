@@ -8,6 +8,7 @@ class Search extends Component {
         searchResults: PropTypes.array.isRequired,
         searchBook: PropTypes.func.isRequired,
         handleChange: PropTypes.func.isRequired,
+        showModal: PropTypes.func.isRequired,
     };
 
     state = {
@@ -23,7 +24,7 @@ class Search extends Component {
     
     render() {
         const { query } = this.state;
-        const { searchResults, handleChange } = this.props;
+        const { searchResults, handleChange, showModal } = this.props;
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -43,7 +44,7 @@ class Search extends Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <BookGrid books={searchResults} handleChange={handleChange} />
+                    <BookGrid books={searchResults} handleChange={handleChange} showInfo={showModal} />
                 </div>
             </div>
         );

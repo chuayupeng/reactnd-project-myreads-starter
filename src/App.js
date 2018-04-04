@@ -3,6 +3,8 @@ import * as BooksAPI from './BooksAPI';
 import { Route } from 'react-router-dom';
 import Search from './Search';
 import BookList from './BookList';
+import Modal from 'react-simple-modal';
+import Card from './Card';
 import './App.css';
 
 class BooksApp extends React.Component {
@@ -11,7 +13,16 @@ class BooksApp extends React.Component {
     wantToReadBooks: [],
     readBooks: [],
     searchResults: [],
+    show: false,
+    bookDetails: [],
   };
+
+  showModal = (bookDetails) => {
+      this.setState(()=> ({
+          show: true,
+          bookDetails,
+      }));
+  }
 
   componentWillMount() {
     this.refreshShelves();
@@ -50,16 +61,30 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
+        <div>
+          <Modal 
+              className='modal-class'
+              onClickOverlay={()=>(this.setState(()=>({
+                  show: false,
+                  bookDetails: []
+              })))}
+              visible={this.state.show}
+          >
+              <Card bookDetails={this.state.bookDetails} />
+          </Modal>
+        </div>
         <Route path='/search' render={() => (<Search 
           searchBook={this.searchBook}
           searchResults={this.state.searchResults}
           handleChange={this.handleChange}
+          showModal={this.showModal}
         />)}/>
         <Route exact path='/' render={() => (<BookList 
           currReadingBooks={this.state.currReadingBooks} 
           wantToReadBooks={this.state.wantToReadBooks}
           readBooks={this.state.readBooks}
           handleChange={this.handleChange}
+          showModal={this.showModal}
         />)}/>
       </div>
     )
