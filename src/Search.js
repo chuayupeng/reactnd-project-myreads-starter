@@ -7,6 +7,7 @@ class Search extends Component {
     static propTypes = {
         searchResults: PropTypes.array.isRequired,
         searchBook: PropTypes.func.isRequired,
+        handleChange: PropTypes.func.isRequired,
     };
     state = {
         query: ''
@@ -19,8 +20,7 @@ class Search extends Component {
     };
     render() {
         const { query } = this.state;
-        const { searchResults } = this.props;
-        console.log(query);
+        const { searchResults, handleChange } = this.props;
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -40,7 +40,7 @@ class Search extends Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <BookGrid books={searchResults} />
+                    <BookGrid books={searchResults} handleChange={handleChange} />
                 </div>
             </div>
         );

@@ -9,18 +9,31 @@ class BookList extends Component {
         currReadingBooks: PropTypes.array.isRequired,
         wantToReadBooks: PropTypes.array.isRequired,
         readBooks: PropTypes.array.isRequired,
+        handleChange: PropTypes.func.isRequired,
     };
     render() {
-        const { currReadingBooks, wantToReadBooks, readBooks } = this.props;
+        const { currReadingBooks, wantToReadBooks, readBooks, handleChange } = this.props;
          return (
             <div className="list-books">
                 <div className="list-books-title">
                     <h1>MyReads</h1>
                 </div>
                 <div className="list-books-content">
-                    <BookShelf title='Currently Reading' books={currReadingBooks} />
-                    <BookShelf title='Want to Read' books={wantToReadBooks} />
-                    <BookShelf title='Read' books={readBooks} />
+                    <BookShelf 
+                        title='Currently Reading' 
+                        books={currReadingBooks} 
+                        handleChange={handleChange}
+                    />
+                    <BookShelf 
+                        title='Want to Read' 
+                        books={wantToReadBooks} 
+                        handleChange={handleChange} 
+                    />
+                    <BookShelf 
+                        title='Read' 
+                        books={readBooks} 
+                        handleChange={handleChange}
+                    />
                 </div>
                 <div className='open-search'>
                     <Link

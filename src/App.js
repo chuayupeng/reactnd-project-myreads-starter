@@ -13,6 +13,9 @@ class BooksApp extends React.Component {
     searchResults: [],
   }
   componentWillMount() {
+    this.refreshShelves();
+  }
+  refreshShelves = () => {
     BooksAPI.getAll().then((books) => {
       const currReadingBooks = books.filter((book)=>(book.shelf === 'currentlyReading'));
       const wantToReadBooks = books.filter((book)=>(book.shelf === 'wantToRead'));
@@ -25,7 +28,12 @@ class BooksApp extends React.Component {
 
     })
   }
-
+  updateShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+      .then(()=>(
+        this.refreshShelves()
+      ));
+  }
   searchBook = (query) => {
     BooksAPI.search(query).then((results)=>{
       const searchResults = Array.isArray(results) ? results : [];
@@ -33,19 +41,25 @@ class BooksApp extends React.Component {
 
     })
   }
+
+  handleChange = (bookDetails) => (event) => {
+    const newShelf = event.target.value;
+    this.updateShelf(bookDetails, newShelf);
+  };
   
   render() {
-    console.log(this.state.currReadingBooks);
     return (
       <div className="app">
         <Route path='/search' render={() => (<Search 
           searchBook={this.searchBook}
           searchResults={this.state.searchResults}
+          handleChange={this.handleChange}
         />)}/>
         <Route exact path='/' render={() => (<BookList 
           currReadingBooks={this.state.currReadingBooks} 
           wantToReadBooks={this.state.wantToReadBooks}
           readBooks={this.state.readBooks}
+          handleChange={this.handleChange}
         />)}/>
       </div>
     )
