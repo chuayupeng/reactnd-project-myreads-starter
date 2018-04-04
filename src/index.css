@@ -9,3 +9,25 @@ body {
   padding: 0;
   font-family: 'Roboto', sans-serif;
 }
+.modal-card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  padding-left: 10%;
+  padding-right: 5%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  width: 100%;
+  height: 100%;
+}
+
+/* On mouse-over, add a deeper shadow */
+.modal-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.modal-class {
+  width: 50%;
+  height: 80%;
+}

@@ -5,13 +5,24 @@ class Book extends Component {
     static propTypes = {
         bookDetails: PropTypes.object.isRequired,
         handleChange: PropTypes.func.isRequired,
+        showInfo: PropTypes.func,
     };
+    
     render() {
-        const { bookDetails, handleChange } = this.props;
+        const { bookDetails, handleChange, showInfo } = this.props;
         return bookDetails.length !== 0 ? (
             <div className="book">
                 <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${bookDetails.imageLinks.thumbnail})` }}></div>
+                    <div 
+                        className="book-cover" 
+                        style={{ 
+                            width: 128, 
+                            height: 193, 
+                            backgroundImage: `url(${bookDetails.imageLinks.thumbnail})` 
+                        }}
+                        onClick={() => (showInfo(bookDetails))}
+                    >
+                    </div>
                     <div className="book-shelf-changer">
                         <select onChange={handleChange(bookDetails)}>
                             <option value="none" disabled>Move to...</option>
