@@ -10,6 +10,7 @@ class Book extends Component {
     
     render() {
         const { bookDetails, handleChange, showInfo } = this.props;
+        const image = bookDetails.imageLinks ? bookDetails.imageLinks.thumbnail : "http://lorempixel.com/128/193/nature/No-Image-Found/";
         return bookDetails.length !== 0 ? (
             <div className="book">
                 <div className="book-top">
@@ -18,15 +19,14 @@ class Book extends Component {
                         style={{ 
                             width: 128, 
                             height: 193, 
-                            backgroundImage: `url(${bookDetails.imageLinks.thumbnail})` 
+                            backgroundImage: `url(${image})` 
                         }}
                         onClick={() => (showInfo(bookDetails))}
                     >
                     </div>
                     <div className="book-shelf-changer">
-                        <select onChange={handleChange(bookDetails)}>
+                        <select onChange={handleChange(bookDetails)} defaultValue={bookDetails.shelf ? bookDetails.shelf : 'none'}>
                             <option value="none" disabled>Move to...</option>
-                            <option value="none">-----------------</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
                             <option value="read">Read</option>
